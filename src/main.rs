@@ -13,27 +13,27 @@ const BLOK: [&str; 10] = [
     "0000", "1111", "2222", "3333", "4444", "5555", "6666", "7777", "8888", "9999",
 ];
 
-// Основний цикл main
+// The main cycle main
 fn main() {
-    // Вивід слів в термінал
+    // Outputting words to the terminal
     println!("Введіть номер оператора 2 значне:");
 
     /*
-        Cтворення змінної з водом значень з клавіатури
+        Creating a variable with a water of values from the keyboard
     */
 
-    // Створення пустого листа
+    // Creating a blank sheet
     let mut kib_kod: String = String::new();
 
-    // Від значень з клавіатури в мутабельну зміну kib_kod(ЗМІНА НЕ ОПРЕДІЛЕНА)
+    // From keyboard values to mutable change kib_kod(CHANGE NOT DEFINED)
     io::stdin().read_line(&mut kib_kod).expect("Помилка");
     /*
-    Задаємо нову не мутабельные зміну kod з точно визначеним класом String(силка)
-    прицьому видаляємо пробіли з початку і кінця листа за допомогою trim()
+    We set a new non-mutable variable kod with a well-defined class String(syllable)
+    and remove spaces from the beginning and end of the email using trim()
     */
     let kod: &str = kib_kod.trim();
 
-    // Задаємо довжину номера
+    // Set the length of the number
     // let mut kib_length: String = String::new();
     // io::stdin().read_line(&mut kib_length).expect("Помилка");
 
@@ -41,29 +41,29 @@ fn main() {
     // let kil: f32 = s.parse::<f32>().unwrap(); //IN STR, OUT I32
 
     let mut length: f32 = 0.0000001;
-    // Створюємо лічильник кількості згенерованих чисел
+    // Create a counter for the number of generated numbers
     let mut quantity: i32 = 0;
 
-    // Створення файла (nomer.txt)
+    // Create a file (nomer.txt)
     println!("Створення файла(nomer.txt) з номерами");
     let mut file: std::fs::File = std::fs::File::create("nomer.txt").expect("Помилка");
 
     /*
-    Цикл з створенням номерів
+    Cycle with number creation
     */
 
     while length < 1.0 {
-        // Створення номерів за допомогою додавання 1
+        // Create numbers by adding 1
         length += 0.0000001;
 
-        // Форматуємо цей формат в строку за допомогою (format("{:.x}" - наскільки округлити значення)
+        // We format this format in a string using (format("{:.x}" - how much to round the value)
         let format: String = format!("{:.7}", length);
-        // Видаляємо перших два символи 0.
+        // Delete the first two 0 characters.
         let arr: &str = &format[2..];
 
-        // Створюємо остаточний номер
+        // Create the final number
         let z: String = format!("{}{}", &kod, &arr);
-        // Перевіряємо чи значення не підпадають під блок
+        // Check if the values do not fall within the block
         if !z.contains(&BLOK[0])
             && !z.contains(&BLOK[1])
             && !z.contains(&BLOK[2])
@@ -76,24 +76,24 @@ fn main() {
             && !z.contains(&BLOK[9])
         {
             /*
-            Водимо значення які пулучилися в фаєл (nomer.txt)
+            We drive the values that have been pushed to the file (nomer.txt)
             */
             file.write_all(z.as_bytes()).expect("Проблема");
 
-            // Для перехода на другу сторінку
+            // To go to the second page
             file.write_all("\n".as_bytes()).expect("Проблема");
 
             quantity += 1;
         }
     }
 
-    // Виводемо скільки ми створили номерів
+    // Print how many numbers we have created
     println!("Було створено {}", &quantity);
 
-    // Виводемо інформацію про те що програма закінчила роботу
+    // Print information that the program has finished working
     println!("Файл створений для закінчення роботи нажміть любу клавіші");
 
-    // Затичка для того щоб зразу не обривати роботу програми
+    // A gag so that you don't immediately interrupt the program
     let mut guess: String = String::new();
 
     io::stdin().read_line(&mut guess).expect("Проблема");
