@@ -16,7 +16,7 @@ const BLOK: [&str; 10] = [
 // The main cycle main
 fn main() {
     // Outputting words to the terminal
-    println!("Введіть номер оператора 2 значне:");
+    println!("Enter the operator's number in 2 digits:");
 
     /*
         Creating a variable with a water of values from the keyboard
@@ -26,7 +26,7 @@ fn main() {
     let mut kib_kod: String = String::new();
 
     // From keyboard values to mutable change kib_kod(CHANGE NOT DEFINED)
-    io::stdin().read_line(&mut kib_kod).expect("Помилка");
+    io::stdin().read_line(&mut kib_kod).expect("Error");
     /*
     We set a new non-mutable variable kod with a well-defined class String(syllable)
     and remove spaces from the beginning and end of the email using trim()
@@ -45,8 +45,8 @@ fn main() {
     let mut quantity: i32 = 0;
 
     // Create a file (nomer.txt)
-    println!("Створення файла(nomer.txt) з номерами");
-    let mut file: std::fs::File = std::fs::File::create("nomer.txt").expect("Помилка");
+    println!("Creating a file (nomer.txt) with numbers");
+    let mut file: std::fs::File = std::fs::File::create("nomer.txt").expect("Error");
 
     /*
     Cycle with number creation
@@ -78,23 +78,23 @@ fn main() {
             /*
             We drive the values that have been pushed to the file (nomer.txt)
             */
-            file.write_all(z.as_bytes()).expect("Проблема");
+            file.write_all(z.as_bytes()).expect("Error");
 
             // To go to the second page
-            file.write_all("\n".as_bytes()).expect("Проблема");
+            file.write_all("\n".as_bytes()).expect("Error");
 
             quantity += 1;
         }
     }
 
     // Print how many numbers we have created
-    println!("Було створено {}", &quantity);
+    println!("The following were created {}", &quantity);
 
     // Print information that the program has finished working
-    println!("Файл створений для закінчення роботи нажміть любу клавіші");
+    println!("The file is created to finish the work, press any key");
 
     // A gag so that you don't immediately interrupt the program
     let mut guess: String = String::new();
 
-    io::stdin().read_line(&mut guess).expect("Проблема");
+    io::stdin().read_line(&mut guess).expect("Error");
 }
